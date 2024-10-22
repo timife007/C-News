@@ -1,8 +1,8 @@
 package com.timife.c_news.data.network.model
 
 
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 @Keep
 data class SourceDto(

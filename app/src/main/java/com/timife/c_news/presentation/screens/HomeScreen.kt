@@ -1,9 +1,8 @@
-package com.timife.c_news.presentation
+package com.timife.c_news.presentation.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -18,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.timife.c_news.domain.model.Article
 import com.timife.c_news.presentation.viewmodels.NewsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,6 +25,7 @@ import com.timife.c_news.presentation.viewmodels.NewsViewModel
 fun HomeScreen (
     modifier:Modifier,
     viewModel: NewsViewModel = hiltViewModel(),
+    onArticleClicked:(article:Article) -> Unit,
     messageBus: @Composable (String) -> Unit
 ){
     val pagedData = viewModel.news.collectAsLazyPagingItems()
@@ -72,6 +73,7 @@ fun HomeScreen (
         NewsListScreen(
             newsItems = pagedData,
             modifier = Modifier,
+            onArticleClicked = onArticleClicked,
             messageBus = {
                 messageBus(it)
             }

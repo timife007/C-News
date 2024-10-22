@@ -100,7 +100,8 @@ dependencies {
     implementation(libs.json.serializer)
     implementation(libs.converter.gson)
     implementation(libs.gson)
-    implementation(libs.logging.interceptor)
+    implementation(libs.interceptor)
+    implementation(libs.androidx.compose.navigation)
     implementation(libs.chuckerLib)
 
 

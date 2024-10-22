@@ -38,6 +38,8 @@ truth = "1.0.1"
 turbine = "0.12.1"
 mockk = "1.12.4"
 gson = "2.11.0"
+navigationCompose = "2.8.0-beta06"
+
 
 
 
@@ -85,12 +87,12 @@ interceptor = {group = "com.squareup.okhttp3", name = "logging-interceptor", ver
 moshi = {group = "com.squareup.moshi", name = "moshi", version.ref = "moshi"}
 moshi-kotlin = {group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi"}
 json-serializer = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "json-serializer"}
-logging-interceptor = {group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttp"}
 coroutines-test = {group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines"}
 core-test = {group = "androidx.arch.core", name = "core-testing", version.ref = "core"}
 turbine = {group = "app.cash.turbine", name = "turbine", version.ref = "turbine"}
 mockk = {group = "io.mockk", name = "mockk", version.ref = "mockk"}
 truth = {group = "com.google.truth", name = "truth", version.ref = "truth"}
+androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref="navigationCompose"}
 runner = {group = "androidx.test", name = "runner", version.ref = "testRunner"}
 
 

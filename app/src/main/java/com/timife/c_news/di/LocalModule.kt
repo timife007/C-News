@@ -2,7 +2,6 @@ package com.timife.c_news.di
 
 import android.content.Context
 import androidx.room.Room
-import com.timife.c_news.data.local.database.NewsDao
 import com.timife.c_news.data.local.database.NewsDatabase
 import dagger.Module
 import dagger.Provides

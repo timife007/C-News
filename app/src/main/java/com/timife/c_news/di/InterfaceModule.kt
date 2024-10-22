@@ -1,6 +1,5 @@
 package com.timife.c_news.di
 
-import com.timife.c_news.data.local.database.NewsDao
 import com.timife.c_news.data.local.database.NewsDatabase
 import com.timife.c_news.data.network.NewsApi
 import com.timife.c_news.data.repositories.NewsRepoImpl

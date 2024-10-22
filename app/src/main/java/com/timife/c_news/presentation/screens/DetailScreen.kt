@@ -1,6 +1,6 @@
-package com.timife.c_news.presentation
+package com.timife.c_news.presentation.screens
 
-import androidx.compose.foundation.Image
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,12 +28,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.timife.c_news.R
 import com.timife.c_news.domain.model.Article
@@ -42,10 +43,9 @@ import com.timife.c_news.ui.theme.CNewsTheme
 @Composable
 fun DetailScreen(
     modifier: Modifier,
-    navController: NavHostController,
-    article: Article
+    article: Article,
+    onNavigateBack: () -> Unit
 ) {
-    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
 
     Column(
         modifier = Modifier
@@ -60,18 +60,24 @@ fun DetailScreen(
                 .wrapContentHeight()
                 .align(Alignment.CenterHorizontally)
                 .shadow(elevation = 2.dp)
-                .padding(10.dp)
         ) {
-            Image(
-                painter = painterResource(R.drawable.fruit),
+            AsyncImage(
+                model = article.imageUrl,
                 contentDescription = "",
-                modifier = Modifier.height(400.dp)
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .height(400.dp)
+                    .clip(RoundedCornerShape(bottomEnd = 10.dp, bottomStart = 10.dp))
             )
             Row(
-                modifier = Modifier.align(Alignment.TopStart)
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(10.dp)
             ) {
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        onNavigateBack()
+                    },
                     modifier = Modifier
                         .clip(
                             RoundedCornerShape(10.dp)
@@ -91,29 +97,50 @@ fun DetailScreen(
                 }
                 Spacer(modifier = Modifier.weight(1f))
             }
-            Text(
-                article.title,
-                style = MaterialTheme.typography.headlineSmall.copy(color = Color.DarkGray),
-                modifier = Modifier.align(Alignment.BottomCenter)
-            )
+
         }
-        OwnerInfo()
+        OwnerInfo(article)
         HorizontalDivider(modifier = Modifier, color = Color.LightGray)
+        Text(
+            article.description,
+            style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onBackground),
+            modifier = Modifier.padding(10.dp),
+            maxLines = 3,
+            overflow = TextOverflow.Ellipsis
+        )
         Text(
             article.content,
             style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onBackground),
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier.padding(10.dp),
+            maxLines = 3,
+            overflow = TextOverflow.Ellipsis,
+            textAlign = TextAlign.Justify
         )
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            stringResource(R.string.author, article.author),
+            style = MaterialTheme.typography.labelSmall.copy(color = MaterialTheme.colorScheme.onBackground),
+            modifier = Modifier.padding(10.dp),
+            overflow = TextOverflow.Ellipsis
+        )
+
     }
 }
 
 @Composable
-fun OwnerInfo() {
+fun OwnerInfo(
+    article: Article
+) {
     Column(
         modifier = Modifier.padding(start = 10.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
         horizontalAlignment = Alignment.Start
     ) {
+        Text(
+            article.title,
+            style = MaterialTheme.typography.headlineSmall.copy(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Bold),
+            modifier = Modifier
+        )
         Text(
             text = article.source,
             style = MaterialTheme.typography.labelMedium,
@@ -131,6 +158,8 @@ fun OwnerInfo() {
 @Composable
 fun DetailScreenPreview() {
     CNewsTheme {
-        DetailScreen(modifier = Modifier.height(100.dp), rememberNavController(), article)
+        DetailScreen(modifier = Modifier.height(100.dp), article) {
+
+        }
     }
 }

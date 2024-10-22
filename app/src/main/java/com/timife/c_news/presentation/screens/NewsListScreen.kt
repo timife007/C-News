@@ -1,6 +1,7 @@
-package com.timife.c_news.presentation
+package com.timife.c_news.presentation.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,6 +41,7 @@ import com.timife.c_news.ui.theme.CNewsTheme
 fun NewsListScreen(
     newsItems: LazyPagingItems<Article>,
     modifier: Modifier = Modifier,
+    onArticleClicked: (article: Article) -> Unit,
     messageBus: @Composable (String) -> Unit
 ) {
 
@@ -74,7 +76,9 @@ fun NewsListScreen(
             ) { index ->
                 val item = newsItems[index]
                 item?.let {
-                    NewsItem(article = it)
+                    NewsItem(article = it, onArticleClicked = {
+                        onArticleClicked(item)
+                    })
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }
@@ -107,13 +111,15 @@ fun NewsListScreen(
 }
 
 @Composable
-fun NewsItem(article: Article) {
+fun NewsItem(article: Article, onArticleClicked: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(10.dp)
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.background).clickable {
+                onArticleClicked()
+            },
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         AsyncImage(
@@ -191,7 +197,8 @@ fun LoadingItem() {
 fun NewsItemPreview() {
     CNewsTheme {
         NewsItem(
-            article
+            article,
+            {}
         )
 
     }
