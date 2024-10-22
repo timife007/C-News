@@ -29,19 +29,12 @@ class NewsViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     val news = searchQuery.debounce(300).flatMapLatest {
-        if (it.isBlank()) {
-            Log.d("NewsViewModel", "Fetching top headlines")
-            newsRepo.getTopHeadlines()
-        } else {
-            Log.d("NewsViewModel", "Fetching search results for $it")
             newsRepo.getPaginatedArticles(query = it)
-        }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = PagingData.empty()
     ).cachedIn(viewModelScope)
-
 
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query

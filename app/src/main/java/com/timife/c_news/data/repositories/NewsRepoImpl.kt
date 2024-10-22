@@ -37,24 +37,11 @@ class NewsRepoImpl @Inject constructor(
                 api = newsApi
             ),
             pagingSourceFactory = {
-                db.newsDao().pagingSource(query)
-            }
-        ).flow.map { pagingData ->
-            pagingData.map {
-                it.toArticle()
-            }
-        }.flowOn(Dispatchers.IO)
-    }
-
-    override fun getTopHeadlines(): Flow<PagingData<Article>> {
-        return Pager(
-            config = PagingConfig(pageSize = 15),
-            remoteMediator = NewsPagingMediator(
-                database = db,
-                api = newsApi
-            ),
-            pagingSourceFactory = {
-                db.newsDao().pagingSource()
+                if (query.isBlank()) {
+                    db.newsDao().pagingSource()
+                }else{
+                    db.newsDao().pagingSource(query)
+                }
             }
         ).flow.map { pagingData ->
             pagingData.map {

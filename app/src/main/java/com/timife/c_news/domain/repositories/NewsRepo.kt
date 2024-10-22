@@ -9,7 +9,4 @@ interface NewsRepo {
     fun getPaginatedArticles(
         query: String
     ): Flow<PagingData<Article>>
-
-
-    fun getTopHeadlines(): Flow<PagingData<Article>>
 }

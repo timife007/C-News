@@ -1,5 +1,6 @@
 package com.timife.c_news.data.paging
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -17,7 +18,7 @@ import java.io.IOException
 class NewsPagingMediator(
     private val database: NewsDatabase,
     private val api: NewsApi,
-    private val q:String? = null
+    private val q:String
 ): RemoteMediator<Int, ArticleEntity>(){
     private val remoteKeyDao = database.remoteKeyDao()
     private val dao = database.newsDao()
@@ -36,9 +37,7 @@ class NewsPagingMediator(
                 }
                 LoadType.APPEND -> {
                     val remoteKey = database.withTransaction {
-                        if (q == null) {
-                            remoteKeyDao.getRemoteKeyByQuery("")
-                        } else  remoteKeyDao.getRemoteKeyByQuery(q)
+                        remoteKeyDao.getRemoteKeyByQuery(q)
                     }
                     if(remoteKey.nextPage == null){
                         return MediatorResult.Success(true)
@@ -47,21 +46,18 @@ class NewsPagingMediator(
                 }
             }
 
-            val data = if (q == null) {
-                api.getTopHeadlines(
-                    page = loadKey,
-                    pageSize = state.config.pageSize
-                ).body()?.articleDtos
-            }
-            else {
+            val data =
                 api.getEverything(query = q, page = loadKey, pageSize =  state.config.pageSize)
                     .body()?.articleDtos
-            }
+
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    dao.clearAll()
-                    remoteKeyDao.deleteAllRemoteKeys(q ?: "")
+                    Log.d("Mediator", "REFRESH: $data")
+                    data?.let {
+                        dao.clearAll()
+                        remoteKeyDao.deleteAllRemoteKeys(q)
+                    }
                 }
 
                 val nextPage = if(data?.isEmpty() == true){
@@ -75,11 +71,7 @@ class NewsPagingMediator(
                 }
 
                 remoteKeyDao.insertOrReplace(
-                    if (q == null) RemoteKey(
-                        title = "",
-                        nextPage = nextPage,
-                        prevPage = null
-                    ) else RemoteKey(
+                    RemoteKey(
                         title = q,
                         nextPage = nextPage,
                         prevPage = null
