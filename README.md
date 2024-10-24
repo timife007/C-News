@@ -48,5 +48,6 @@ To build this project, you require:
 - Gradle or AGP 8.7.1
 - Kotlin version 2.0.0,
 - Clone the repository.
-- Get your personalized News App [News App Api Key](https://newsapi.org) from the news api website and set the value as 'api_key' without quotes in your local.properties file and rebuild your project.
+- Get your personalized News App [News App Api Key](https://newsapi.org) from the news api website and set the value as 'api_key' without quotes in your local.properties file and rebuild your project. The image image below shows how it should be done.
 
+![Screenshot 2024-10-24 at 13 12 55](https://github.com/user-attachments/assets/001f41fa-634a-4235-8a3a-bc1ee1eecb89)
