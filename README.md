@@ -23,6 +23,7 @@ This Simple News Search App demonstrates modern Android development with Hilt, C
 - [ksp](https://github.com/google/ksp): Kotlin Symbol Processing API.
 - [Retrofit](https://github.com/square/retrofit): A networking library for fetching data over the internet
 - [Turbine](https://github.com/cashapp/turbine): A small testing library for kotlinx.coroutines Flow.
+- JUnit4 for Unit and Instrumentation Tests
 - Material3 design guidelines
   
 ## Architecture
