@@ -13,10 +13,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.timife.c_news.R
 import com.timife.c_news.domain.model.Article
 import com.timife.c_news.presentation.viewmodels.NewsViewModel
 
@@ -36,7 +38,6 @@ fun HomeScreen (
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val onActiveChange = { }
         val colors1 = SearchBarDefaults.colors()
         SearchBar(
             inputField = {
@@ -50,7 +51,7 @@ fun HomeScreen (
                     onExpandedChange = {},
                     enabled = true,
                     placeholder = {
-                        Text(text = "Search")
+                        Text(text = stringResource(R.string.search_news))
                     },
                     leadingIcon = {
                         Icon(imageVector = Icons.Outlined.Search, contentDescription = null)

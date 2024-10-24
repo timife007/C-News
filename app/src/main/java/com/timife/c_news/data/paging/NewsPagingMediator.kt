@@ -1,6 +1,5 @@
 package com.timife.c_news.data.paging
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -53,7 +52,6 @@ class NewsPagingMediator(
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    Log.d("Mediator", "REFRESH: $data")
                     data?.let {
                         dao.clearAll()
                         remoteKeyDao.deleteAllRemoteKeys(q)

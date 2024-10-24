@@ -14,10 +14,10 @@ interface NewsDao {
     suspend fun upsertAll(posts: List<ArticleEntity>)
 
     @Query("SELECT * FROM news WHERE title LIKE '%' || :query || '%'")
-    fun pagingSource(query: String): PagingSource<Int, ArticleEntity>
+    fun pagedArticles(query: String): PagingSource<Int, ArticleEntity>
 
     @Query("SELECT * FROM news")
-    fun pagingSource(): PagingSource<Int, ArticleEntity>
+    fun pagedArticles(): PagingSource<Int, ArticleEntity>
 
     @Query("DELETE FROM news")
     suspend fun clearAll()

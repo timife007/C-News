@@ -22,11 +22,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.timife.c_news.domain.model.Article
-import com.timife.c_news.presentation.screens.DetailScreen
-import com.timife.c_news.presentation.screens.HomeScreen
 import com.timife.c_news.presentation.navigation.CustomNavType
 import com.timife.c_news.presentation.navigation.NewsDetailRoute
 import com.timife.c_news.presentation.navigation.NewsListRoute
+import com.timife.c_news.presentation.screens.DetailScreen
+import com.timife.c_news.presentation.screens.HomeScreen
 import com.timife.c_news.ui.theme.CNewsTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

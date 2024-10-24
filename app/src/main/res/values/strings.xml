@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">C-News</string>
     <string name="author">Author: %1$s</string>
+    <string name="search_news">Search news</string>
+    <string name="no_latest_news_found_search_for_latest_news_update">No latest News Found, Search for latest news update</string>
+    <string name="unable_to_load_items_please_try_again">Unable to load items, please try again</string>
+    <string name="unknown_error_occurred_please_check_internet_connection">Unknown error occurred, please check internet connection</string>
 </resources>

@@ -37,10 +37,10 @@ class NewsRepoImpl @Inject constructor(
                 api = newsApi
             ),
             pagingSourceFactory = {
-                if (query.isBlank()) {
-                    db.newsDao().pagingSource()
+                if (query.isBlank() || query.isEmpty()) {
+                    db.newsDao().pagedArticles()
                 }else{
-                    db.newsDao().pagingSource(query)
+                    db.newsDao().pagedArticles(query)
                 }
             }
         ).flow.map { pagingData ->
