@@ -70,7 +70,6 @@ class MainActivity : ComponentActivity() {
                         ) {
                             val arguments = it.toRoute<NewsDetailRoute>()
                             DetailScreen(
-                                modifier = Modifier,
                                 article = arguments.article,
                             ){
                                 navController.navigateUp()

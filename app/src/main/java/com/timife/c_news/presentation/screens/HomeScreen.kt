@@ -46,7 +46,9 @@ fun HomeScreen (
                     onQueryChange = {
                         viewModel.onSearchQueryChanged(it)
                     },
-                    onSearch = { },
+                    onSearch = {
+                        viewModel.onSearchQueryChanged(it)
+                    },
                     expanded = false,
                     onExpandedChange = {},
                     enabled = true,
@@ -57,7 +59,6 @@ fun HomeScreen (
                         Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
                     },
                     trailingIcon = null,
-                    colors = colors1.inputFieldColors,
                     interactionSource = null,
                 )
             },

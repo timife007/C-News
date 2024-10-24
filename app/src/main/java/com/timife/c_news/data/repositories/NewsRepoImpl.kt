@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-@RequiresApi(Build.VERSION_CODES.O)
 class NewsRepoImpl @Inject constructor(
     private val newsApi: NewsApi,
     private val db: NewsDatabase

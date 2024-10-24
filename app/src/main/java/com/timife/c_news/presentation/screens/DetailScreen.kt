@@ -41,7 +41,6 @@ import com.timife.c_news.ui.theme.CNewsTheme
 
 @Composable
 fun DetailScreen(
-    modifier: Modifier,
     article: Article,
     onNavigateBack: () -> Unit
 ) {
@@ -157,7 +156,7 @@ fun OwnerInfo(
 @Composable
 fun DetailScreenPreview() {
     CNewsTheme {
-        DetailScreen(modifier = Modifier.height(100.dp), article) {
+        DetailScreen(article) {
 
         }
     }

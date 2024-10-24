@@ -20,7 +20,6 @@ fun ArticleDto.toArticleEntity(): ArticleEntity {
 }
 
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun ArticleEntity.toArticle(): Article {
     return Article(
         title = title,
